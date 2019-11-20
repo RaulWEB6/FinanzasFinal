@@ -31,6 +31,12 @@ public class EmpresaController {
 		model.addAttribute("empresa", new Empresa());
 		return "empresa/empresa";
 	}
+	
+	@GetMapping("/nosotros")
+	public String nosotros() 
+	{
+		return "/nosotros";
+	}
 
 	@PostMapping("/guardar")
 	public String guardarEmpresa(@Valid Empresa empresa, BindingResult result, Model model, SessionStatus status)
