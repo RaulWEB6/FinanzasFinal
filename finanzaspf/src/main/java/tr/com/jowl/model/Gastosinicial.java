@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "gastosiniciales")
+@Table(name = "gastosinicial")
 public class Gastosinicial implements Serializable {
 
 	/**
