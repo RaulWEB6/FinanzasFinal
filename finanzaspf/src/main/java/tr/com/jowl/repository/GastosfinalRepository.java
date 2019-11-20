@@ -1,5 +1,7 @@
 package tr.com.jowl.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +14,7 @@ public interface GastosfinalRepository extends JpaRepository<Gastosfinal, Intege
 
 	@Query("select count(e.nombreGastosfinal) from Gastosfinal e where e.nombreGastosfinal =:nombreGastosfinal")
 	public int validarNombreGastosfinal(@Param("nombreGastosfinal") String nombreGastosfinal);
+
+	@Query("from Gastosfinal g where g.bancoGastosfinal.idBanco = ?1")
+	List<Gastosfinal> findByNombreBanco(int idBanco);
 }

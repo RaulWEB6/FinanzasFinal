@@ -25,8 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tr.com.jowl.model.Banco;
 import tr.com.jowl.model.Factura;
+import tr.com.jowl.model.Gastosfinal;
 import tr.com.jowl.service.IBancoService;
 import tr.com.jowl.service.IEmpresaService;
+import tr.com.jowl.service.IGastosfinalService;
 import tr.com.jowl.service.IUploadFileService;
 import tr.com.jowl.service.UserService;
 
@@ -39,12 +41,15 @@ public class BancoController {
 
 	@Autowired
 	private IUploadFileService uploadFileService;
-	
+
 	@Autowired
 	private IEmpresaService eService;
-	
+
 	@Autowired
 	private UserService uService;
+
+	@Autowired
+	private IGastosfinalService gfService;
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -135,7 +140,7 @@ public class BancoController {
 	}
 
 	@GetMapping("/detalle/{id}")
-	public String detailsBanco(@PathVariable(value = "id") int id, Model model) {
+	public String detailsBanco(@PathVariable(value = "id") int id, Model model, RedirectAttributes redirAttrs) {
 		try {
 			Optional<Banco> detalle = bService.listarId(id);
 			if (!detalle.isPresent()) {
@@ -150,8 +155,10 @@ public class BancoController {
 
 		model.addAttribute("valorBoton", "Guardar");
 		model.addAttribute("factura", new Factura());
+		model.addAttribute("gastofinal", new Gastosfinal());
 		model.addAttribute("listaEmpresas", eService.listar());
 		model.addAttribute("listaUsuarios", uService.listar());
+		model.addAttribute("listaGastofinales", gfService.buscar(id));
 		return "/factura/factura";
 	}
 

@@ -32,7 +32,7 @@ public class Gastosfinal implements Serializable {
 	private String nombreGastosfinal;
 
 	@Min(1)
-	@Max(1000)
+	@Max(9000)
 	@Column(name = "montoGastosfinal", nullable = false)
 	private int montoGastosfinal;
 
@@ -40,9 +40,7 @@ public class Gastosfinal implements Serializable {
 	@JoinColumn(name = "idBanco")
 	private Banco bancoGastosfinal;
 
-	public Gastosfinal(int idGastosfinal,
-			@NotEmpty(message = "Ingresa el nombre del gasto final") String nombreGastosfinal,
-			@Min(1) @Max(1000) int montoGastosfinal, Banco bancoGastosfinal) {
+	public Gastosfinal(int idGastosfinal, String nombreGastosfinal, int montoGastosfinal, Banco bancoGastosfinal) {
 		super();
 		this.idGastosfinal = idGastosfinal;
 		this.nombreGastosfinal = nombreGastosfinal;

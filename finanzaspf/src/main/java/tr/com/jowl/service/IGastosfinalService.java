@@ -11,4 +11,6 @@ public interface IGastosfinalService {
 	public void eliminar(int idGastosfinal);
 
 	List<Gastosfinal> listar();
+	
+	List<Gastosfinal> buscar(int idBanco);
 }

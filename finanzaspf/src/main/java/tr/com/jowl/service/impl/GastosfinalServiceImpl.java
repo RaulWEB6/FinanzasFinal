@@ -38,4 +38,9 @@ public class GastosfinalServiceImpl implements IGastosfinalService {
 		return gR.findAll(Sort.by(Sort.Direction.ASC, "nombreGastosfinal"));
 	}
 
+	@Override
+	public List<Gastosfinal> buscar(int idBanco) {
+		return gR.findByNombreBanco(idBanco);
+	}
+
 }

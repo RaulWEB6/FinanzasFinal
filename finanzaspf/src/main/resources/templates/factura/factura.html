@@ -106,15 +106,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="inner-block">
 				<div class="inbox">
 					<br>
-
+					<!-- Campos de la factura-->
 					<h1 class="h3 mb-4 text-gray-800">Registro de Factura:</h1>
-
 					<br>
-
 					<form th:action="@{/facturas/guardar}" th:object="${factura}"
 						method="post" enctype="multipart/form-data">
 
-						<!-- Campo ID de la nueva lista de compra-->
 						<div class="form-group row" style="display: none !important;">
 							<label for="idFactura" class="col-sm-2 col-form-label">Id:
 							</label>
@@ -123,8 +120,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 
-
-						<!-- Campo Proveedor de la nueva lista de compra-->
 						<div class="form-group row">
 							<label for="bancoFactura" class="col-sm-2 col-form-label">Banco:</label>
 							<div class="col-sm-6">
@@ -136,7 +131,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 
-						<!-- Campo Fecha de la nueva lista de compra-->
 						<div class="form-group row">
 							<label for="fechaiFactura" class="col-sm-2 col-form-label">Fecha
 								de creacion de la factura:</label>
@@ -163,7 +157,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 
-						<!-- Campo Empresas de la nueva lista-->
 						<div class="form-group row">
 							<label for="empresaFactura" class="col-sm-2 col-form-label">Empresa
 								responsable:</label>
@@ -188,22 +181,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									th:errors="*{totalFactura}"></small>
 							</div>
 						</div>
-						
-						<!-- listaUsuarios-->
+
 						<div class="form-group row">
-							<label for="userFactura" class="col-sm-2 col-form-label">Usuario de la factura:</label>
+							<label for="userFactura" class="col-sm-2 col-form-label">Usuario
+								de la factura:</label>
 							<div class="col-sm-6">
-								<select class="form-control"
-									th:field="*{userFactura.id}">
+								<select class="form-control" th:field="*{userFactura.id}">
 									<option th:each="l: ${listaUsuarios}" th:value="${l.id}"
 										th:text="${l.username}"
 										th:selected="(${l.id} == *{userFactura.id})"></option>
 								</select>
 							</div>
 						</div>
-
-
-
 
 						<div class="form-group row">
 							<div class="col-sm-6" align="center">
@@ -213,20 +202,98 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</form>
-
-
-
-
-
-
-
-
-
-
 					<div th:if="${mensaje}" class="alert alert-info">
 						<p th:text="${mensaje}"></p>
 					</div>
-					<br> <br> <br> <br> <br>
+					<br> <br> <br>
+
+
+
+
+
+
+					<!-- Campos del gasto final-->
+					<form th:action="@{/gastosfinales/guardar}"
+						th:object="${gastofinal}" method="post">
+
+						<div class="form-group row" style="display: none !important;">
+							<label for="idGastosfinal" class="col-sm-2 col-form-label">Id</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{idGastosfinal}"
+									class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="nombreGastosfinal" class="col-sm-2 col-form-label">Nombre
+								del Gasto Final: </label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{nombreGastosfinal}"
+									class="form-control" th:errorclass="'form-control alert-info'"
+									maxlength="30" /> <small
+									th:if="${#fields.hasErrors('nombreGastosfinal')}"
+									th:errors="*{nombreGastosfinal}"></small>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="montoGastosfinal" class="col-sm-2 col-form-label">Monto
+								del gasto: </label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{montoGastosfinal}"
+									class="form-control"
+									th:errorclass="'form-control alert-danger'" maxlength="4" /> <small
+									th:if="${#fields.hasErrors('montoGastosfinal')}"
+									th:errors="*{montoGastosfinal}"></small>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="bancoGastosfinal" class="col-sm-2 col-form-label">Banco:</label>
+							<div class="col-sm-6">
+								<select class="form-control"
+									th:field="*{bancoGastosfinal.idBanco}">
+									<option th:each="b: ${banco}" th:value="${b.idBanco}"
+										th:text="${b.nombreBanco}"
+										th:selected="(${b.idBanco} == *{bancoGastosfinal.idBanco})"></option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6" align="center">
+								<input type="submit" value="Registrar" class="btn btn-primary" />
+							</div>
+						</div>
+					</form>
+					<br> <br>
+
+
+
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-white">
+								<thead class="bg-dark mb-3 text-white">
+									<tr>
+										<th>Id</th>
+										<th>Nombres</th>
+										<th>Costos</th>
+									</tr>
+								</thead>
+								<tbody id="proyecto-list">
+									<tr th:each="gastof:${listaGastofinales}">
+										<td th:text="${gastof.idGastosfinal}"></td>
+										<td th:text="${gastof.nombreGastosfinal}"></td>
+										<td th:text="${gastof.montoGastosfinal}"></td>
+									</tr>
+								</tbody>
+							</table>
+							<div th:if="${mensaje}" class="alert alert-info">
+								<p th:text="${mensaje}"></p>
+							</div>
+						</div>
+					</div>
+					<br> <br>
 				</div>
 			</div>
 
