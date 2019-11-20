@@ -112,9 +112,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!--inner block start here-->
 			<div class="inner-block">
 				<div class="inbox">
-					<br> <br> <br> <br> <br> <br> <br>
-					<br> <br> <br> <br> <br> <br> <br>
-					<br> <br> <br>
+					<br> <br> <br> <br> <br>
+					<div>
+
+						<p>
+							<i class="fa fa-hand-o-right"></i> Selecciona "Registrar Empresa"
+							si deseas agregar una empresa a nuestra base de datos.
+						</p>
+					</div>
+					<br> <br>
+					<div>
+						<p>
+							<i class="fa fa-hand-o-right"></i> Selecciona "Continuar" si
+							deseas escoger un banco existente en nuestra base de datos.
+						</p>
+					</div>
+					<br> <br> <br> <br> <br>
+					<div class="form-group row">
+						<div class="col-sm-6" align="center">
+							<a href="/empresas/nuevo" class="btn btn-danger">Registrar Empresa</a>
+
+							<a href="/bancos/listar" class="btn btn-danger">¡Comenzar!</a>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -138,14 +158,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="menu">
 				<ul id="menu">
-					<li id="menu-home"><a th:href="@{/movie/listar}"><i
+					<li id="menu-home"><a th:href="@{/bancos/bienvenido}"><i
 							class="fa fa-tachometer"></i><span>Bancos</span><span
 							class="fa fa-angle-right" style="float: right"></span></a>
 						<ul>
 							<li><a th:href="@{/bancos/listar}">Lista</a></li>
 							<li><a th:href="@{/bancos/nuevo}">Nuevo</a></li>
 						</ul></li>
-					<li id="menu-home"><a th:href="@{/location/list}"><i
+					<li id="menu-home"><a th:href="@{/bancos/bienvenido}"><i
 							class="fa fa-map-marker"></i><span>Empresas</span><span
 							class="fa fa-angle-right" style="float: right"></span></a>
 						<ul>
