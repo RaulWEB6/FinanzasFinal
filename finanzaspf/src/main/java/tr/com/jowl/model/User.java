@@ -1,6 +1,8 @@
 package tr.com.jowl.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import java.util.Objects;
@@ -14,30 +16,39 @@ public class User {
 	@Column(name = "id", unique = true)
 	private int id;
 
-	@Column(name = "username")
+	@NotEmpty(message = "Ingrese el nombre de usuario.")
+	@Column(name = "username", nullable = false, length = 20, unique = true)
 	private String username;
 
-	@Column(name = "firstName")
+	@NotEmpty(message = "Ingrese sus nombres.")
+	@Column(name = "firstName", nullable = false, length = 25)
 	private String firstName;
 
-	@Column(name = "lastName")
+	@NotEmpty(message = "Ingrese sus apellidos completos.")
+	@Column(name = "lastName", nullable = false, length = 25)
 	private String lastName;
 
-	@Column(name = "password")
+	@NotEmpty(message = "Ingrese una contraseña entre 8 a 16 caracteres.")
+	@Column(name = "password", nullable = false, length = 16)
 	private String password;
 
 	@Transient
-	@Column(name = "password_2")
+	@NotEmpty(message = "La contraseña debe ser igual a la ingresada anteriormente.")
+	@Column(name = "password_2", nullable = false, length = 16)
 	private String password_2;
 
-	@Column(name = "email")
+	@Email
+	@NotEmpty(message = "Ingrese un correo electrónico válido.")
+	@Column(name = "email", nullable = false, length = 30, unique = true)
 	private String email;
 
-	@Size(min = 11, max = 11)
-	@Column(name = "dni")
+	@Size(min = 8, max = 8, message = "El DNI tiene que contener 8 d\u00edgitos")
+
+	@Column(name = "dni", nullable = false, length = 8, unique = true)
 	private String dni;
 
-	@Column(name = "gender")
+
+	@Column(name = "gender", nullable = false, length = 15)
 	private String gender;
 
 	@Column(name = "role")

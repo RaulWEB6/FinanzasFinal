@@ -28,7 +28,7 @@ public class Banco implements Serializable {
 	private int idBanco;
 
 	@NotEmpty(message = "Ingresa el nombre comercial del banco")
-	@Column(name = "nombreBanco", nullable = false, length = 40)
+	@Column(name = "nombreBanco", nullable = false, length = 70)
 	private String nombreBanco;
 
 	@Min(0)
@@ -38,7 +38,7 @@ public class Banco implements Serializable {
 
 	@Size(min = 11, max = 11, message = "EL RUC tiene que ser de 11 d\u00edgitos")
 	@NotEmpty(message = "Ingresar RUC")
-	@Column(name = "rucBanco", nullable = false, length = 12, unique = true)
+	@Column(name = "rucBanco", nullable = false, length = 11, unique = true)
 	private String rucBanco;
 
 	@Min(0)
