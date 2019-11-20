@@ -25,7 +25,7 @@ public class Empresa implements Serializable {
 	private int idEmpresa;
 
 	@NotEmpty(message = "Ingresa el nombre de la empresa")
-	@Column(name = "nombreEmpresa", nullable = false, length = 30)
+	@Column(name = "nombreEmpresa", nullable = false, length = 20)
 	private String nombreEmpresa;
 
 	@NotEmpty(message = "Ingrese el prestigio de la empresa")

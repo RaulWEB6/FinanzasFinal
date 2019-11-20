@@ -28,7 +28,7 @@ public class Banco implements Serializable {
 	private int idBanco;
 
 	@NotEmpty(message = "Ingresa el nombre comercial del banco")
-	@Column(name = "nombreBanco", nullable = false, length = 70)
+	@Column(name = "nombreBanco", nullable = false, length = 40)
 	private String nombreBanco;
 
 	@Min(0)
