@@ -40,6 +40,10 @@ public class Gastosinicial implements Serializable {
 	@JoinColumn(name = "idBanco")
 	private Banco bancoGastosinicial;
 
+	public void setBancoGastosinicial(Banco bancoGastosinicial) {
+		this.bancoGastosinicial = bancoGastosinicial;
+	}
+
 	public Gastosinicial(int idGastosinicial, String nombreGastosinicial, int montoGastosinicial) {
 		super();
 		this.idGastosinicial = idGastosinicial;
@@ -73,6 +77,32 @@ public class Gastosinicial implements Serializable {
 
 	public void setMontoGastosinicial(int montoGastosinicial) {
 		this.montoGastosinicial = montoGastosinicial;
+	}
+
+	public Banco getBancoGastosinicial() {
+		return bancoGastosinicial;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idGastosinicial;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Gastosinicial other = (Gastosinicial) obj;
+		if (idGastosinicial != other.idGastosinicial)
+			return false;
+		return true;
 	}
 
 }

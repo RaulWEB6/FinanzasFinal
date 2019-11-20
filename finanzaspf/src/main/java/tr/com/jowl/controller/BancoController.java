@@ -26,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tr.com.jowl.model.Banco;
 import tr.com.jowl.model.Factura;
 import tr.com.jowl.model.Gastosfinal;
+import tr.com.jowl.model.Gastosinicial;
 import tr.com.jowl.service.IBancoService;
 import tr.com.jowl.service.IEmpresaService;
 import tr.com.jowl.service.IGastosfinalService;
+import tr.com.jowl.service.IGastosinicialService;
 import tr.com.jowl.service.IUploadFileService;
 import tr.com.jowl.service.UserService;
 
@@ -50,6 +52,9 @@ public class BancoController {
 
 	@Autowired
 	private IGastosfinalService gfService;
+	
+	@Autowired
+	private IGastosinicialService giService;
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
@@ -156,9 +161,11 @@ public class BancoController {
 		model.addAttribute("valorBoton", "Guardar");
 		model.addAttribute("factura", new Factura());
 		model.addAttribute("gastofinal", new Gastosfinal());
+		model.addAttribute("gastoinicial", new Gastosinicial());
 		model.addAttribute("listaEmpresas", eService.listar());
 		model.addAttribute("listaUsuarios", uService.listar());
 		model.addAttribute("listaGastofinales", gfService.buscar(id));
+		model.addAttribute("listaGastoiniciales", giService.buscar(id));
 		return "/factura/factura";
 	}
 

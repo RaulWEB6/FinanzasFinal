@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import tr.com.jowl.model.Empresa;
 import tr.com.jowl.model.Factura;
 import tr.com.jowl.model.Gastosfinal;
 import tr.com.jowl.model.Gastosinicial;
@@ -22,14 +21,14 @@ import tr.com.jowl.service.IGastosinicialService;
 import tr.com.jowl.service.UserService;
 
 @Controller
-@RequestMapping("/gastosfinales")
-public class GastosfinalController {
-
-	@Autowired
-	private IGastosfinalService gfService;
+@RequestMapping("/gastosiniciales")
+public class GastosinicialController {
 
 	@Autowired
 	private IGastosinicialService giService;
+	
+	@Autowired
+	private IGastosfinalService gfService;
 
 	@Autowired
 	private IEmpresaService eService;
@@ -43,12 +42,12 @@ public class GastosfinalController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarGastofinal(@Valid Gastosfinal gastosfinal, BindingResult result, Model model,
+	public String guardarGastoinicial(@Valid Gastosinicial gastosinicial, BindingResult result, Model model,
 			SessionStatus status, RedirectAttributes redirAttrs) throws Exception {
 		if (result.hasErrors()) {
 			return "/factura/factura";
 		} else {
-			int rpta = gfService.insertar(gastosfinal);
+			int rpta = giService.insertar(gastosinicial);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
 				return "/factura/factura";
@@ -69,10 +68,10 @@ public class GastosfinalController {
 	}
 
 	@GetMapping("/listar")
-	public String listarGastofinal(Model model) {
+	public String listarGastoinicial(Model model) {
 		try {
-			model.addAttribute("Gastofinal", new Empresa());
-			model.addAttribute("listaGastofinales", gfService.listar());
+			model.addAttribute("Gastoinicial", new Gastosinicial());
+			model.addAttribute("listaGastoiniciales", giService.listar());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}

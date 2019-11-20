@@ -105,6 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			<div class="inner-block">
 				<div class="inbox">
+
 					<br>
 					<!-- Campos de la factura-->
 					<h1 class="h3 mb-4 text-gray-800">Registro de Factura:</h1>
@@ -208,92 +209,182 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<br> <br> <br>
 
 
+					<div style="width: 1000px; height: 1000px; padding: 3px;">
+
+						<div style="width: 475px; float: left;">
+							<!-- Campos del gasto inicial-->
+							<h1 class="h3 mb-4 text-gray-800">Gastos Iniciales:</h1>
+							<form th:action="@{/gastosiniciales/guardar}"
+								th:object="${gastoinicial}" method="post">
+
+								<div class="form-group row" style="display: none !important;">
+									<label for="idGastosinicial" class="col-sm-2 col-form-label">Id</label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{idGastosinicial}"
+											class="form-control" />
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="nombreGastosinicial"
+										class="col-sm-2 col-form-label">Nombre del Gasto
+										Inicial: </label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{nombreGastosinicial}"
+											class="form-control"
+											th:errorclass="'form-control alert-info'" maxlength="30" />
+										<small th:if="${#fields.hasErrors('nombreGastosinicial')}"
+											th:errors="*{nombreGastosinicial}"></small>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="montoGastosinicial" class="col-sm-2 col-form-label">Monto
+										del gasto: </label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{montoGastosinicial}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'" maxlength="4" />
+										<small th:if="${#fields.hasErrors('montoGastosinicial')}"
+											th:errors="*{montoGastosinicial}"></small>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="bancoGastosinicial" class="col-sm-2 col-form-label">Banco:</label>
+									<div class="col-sm-6">
+										<select class="form-control"
+											th:field="*{bancoGastosinicial.idBanco}">
+											<option th:each="b: ${banco}" th:value="${b.idBanco}"
+												th:text="${b.nombreBanco}"
+												th:selected="(${b.idBanco} == *{bancoGastosinicial.idBanco})"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-6" align="center">
+										<input type="submit" th:value="${valorBoton}"
+											class="btn btn-primary" />
+									</div>
+								</div>
+							</form>
 
 
+							<!-- Lista de Gastos iniciales-->
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-white">
+										<thead class="bg-dark mb-3 text-white">
+											<tr>
+												<th>Id</th>
+												<th>Nombres</th>
+												<th>Costos</th>
+											</tr>
+										</thead>
+										<tbody id="proyecto-list">
+											<tr th:each="gastoi:${listaGastoiniciales}">
+												<td th:text="${gastoi.idGastosinicial}"></td>
+												<td th:text="${gastoi.nombreGastosinicial}"></td>
+												<td th:text="${gastoi.montoGastosinicial}"></td>
+											</tr>
+										</tbody>
+									</table>
+									<div th:if="${mensaje}" class="alert alert-info">
+										<p th:text="${mensaje}"></p>
+									</div>
+								</div>
+							</div>
 
+						</div>
 
-					<!-- Campos del gasto final-->
-					<form th:action="@{/gastosfinales/guardar}"
-						th:object="${gastofinal}" method="post">
+						<div style="width: 475px; float: right;">
+							<!-- Campos del gasto final-->
+							<h1 class="h3 mb-4 text-gray-800">Gastos Finales:</h1>
+							<form th:action="@{/gastosfinales/guardar}"
+								th:object="${gastofinal}" method="post">
 
-						<div class="form-group row" style="display: none !important;">
-							<label for="idGastosfinal" class="col-sm-2 col-form-label">Id</label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{idGastosfinal}"
-									class="form-control" />
+								<div class="form-group row" style="display: none !important;">
+									<label for="idGastosfinal" class="col-sm-2 col-form-label">Id</label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{idGastosfinal}"
+											class="form-control" />
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="nombreGastosfinal" class="col-sm-2 col-form-label">Nombre
+										del Gasto Final: </label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{nombreGastosfinal}"
+											class="form-control"
+											th:errorclass="'form-control alert-info'" maxlength="30" />
+										<small th:if="${#fields.hasErrors('nombreGastosfinal')}"
+											th:errors="*{nombreGastosfinal}"></small>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="montoGastosfinal" class="col-sm-2 col-form-label">Monto
+										del gasto: </label>
+									<div class="col-sm-6">
+										<input type="text" th:field="*{montoGastosfinal}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'" maxlength="4" />
+										<small th:if="${#fields.hasErrors('montoGastosfinal')}"
+											th:errors="*{montoGastosfinal}"></small>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="bancoGastosfinal" class="col-sm-2 col-form-label">Banco:</label>
+									<div class="col-sm-6">
+										<select class="form-control"
+											th:field="*{bancoGastosfinal.idBanco}">
+											<option th:each="b: ${banco}" th:value="${b.idBanco}"
+												th:text="${b.nombreBanco}"
+												th:selected="(${b.idBanco} == *{bancoGastosfinal.idBanco})"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-6" align="center">
+										<input type="submit" value="Registrar" class="btn btn-primary" />
+									</div>
+								</div>
+							</form>
+
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-white">
+										<thead class="bg-dark mb-3 text-white">
+											<tr>
+												<th>Id</th>
+												<th>Nombres</th>
+												<th>Costos</th>
+											</tr>
+										</thead>
+										<tbody id="proyecto-list">
+											<tr th:each="gastof:${listaGastofinales}">
+												<td th:text="${gastof.idGastosfinal}"></td>
+												<td th:text="${gastof.nombreGastosfinal}"></td>
+												<td th:text="${gastof.montoGastosfinal}"></td>
+											</tr>
+										</tbody>
+									</table>
+									<div th:if="${mensaje}" class="alert alert-info">
+										<p th:text="${mensaje}"></p>
+									</div>
+								</div>
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<label for="nombreGastosfinal" class="col-sm-2 col-form-label">Nombre
-								del Gasto Final: </label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{nombreGastosfinal}"
-									class="form-control" th:errorclass="'form-control alert-info'"
-									maxlength="30" /> <small
-									th:if="${#fields.hasErrors('nombreGastosfinal')}"
-									th:errors="*{nombreGastosfinal}"></small>
-							</div>
-						</div>
 
-						<div class="form-group row">
-							<label for="montoGastosfinal" class="col-sm-2 col-form-label">Monto
-								del gasto: </label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{montoGastosfinal}"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" maxlength="4" /> <small
-									th:if="${#fields.hasErrors('montoGastosfinal')}"
-									th:errors="*{montoGastosfinal}"></small>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="bancoGastosfinal" class="col-sm-2 col-form-label">Banco:</label>
-							<div class="col-sm-6">
-								<select class="form-control"
-									th:field="*{bancoGastosfinal.idBanco}">
-									<option th:each="b: ${banco}" th:value="${b.idBanco}"
-										th:text="${b.nombreBanco}"
-										th:selected="(${b.idBanco} == *{bancoGastosfinal.idBanco})"></option>
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-sm-6" align="center">
-								<input type="submit" value="Registrar" class="btn btn-primary" />
-							</div>
-						</div>
-					</form>
-					<br> <br>
-
-
-
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-white">
-								<thead class="bg-dark mb-3 text-white">
-									<tr>
-										<th>Id</th>
-										<th>Nombres</th>
-										<th>Costos</th>
-									</tr>
-								</thead>
-								<tbody id="proyecto-list">
-									<tr th:each="gastof:${listaGastofinales}">
-										<td th:text="${gastof.idGastosfinal}"></td>
-										<td th:text="${gastof.nombreGastosfinal}"></td>
-										<td th:text="${gastof.montoGastosfinal}"></td>
-									</tr>
-								</tbody>
-							</table>
-							<div th:if="${mensaje}" class="alert alert-info">
-								<p th:text="${mensaje}"></p>
-							</div>
-						</div>
 					</div>
-					<br> <br>
+
+					<br> <br> <br> <br>
+
 				</div>
 			</div>
 
