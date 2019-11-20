@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Register</title>
+<meta name="description" content="spring-boot thymeleaf | Register ">
+<div th:replace="fragments/header :: header-login-css"></div>
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i%7CRajdhani:400,600,700"
+	rel="stylesheet">
+</head>
+
+<body>
+	<br />
+	<hr />
+	<div class="separator"></div>
+	<div class="row">
+		<div class="container">
+			<div class="login-register-form-section">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="col-xs-6"><a th:href="@{/login}">Login</a></li>
+					<li class="col-xs-6"><a class="active" href="#register"
+						data-toggle="tab">Register</a></li>
+
+				</ul>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane fade in active" id="register">
+
+						<div th:if="${saveUser eq 'success'}"
+							class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<strong>Usuario registrado correctamente</strong> Logeate para
+							continuar
+						</div>
+
+						<div th:if="${saveUser eq 'exist-name'}"
+							class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<strong>¡Error!</strong> ¡¡¡ Username ya está registrado !!!
+						</div>
+						<div th:if="${saveUser eq 'exist-email'}"
+							class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<strong>Error!</strong> ¡¡¡ Email ya está registrado !!!
+						</div>
+						<div th:if="${saveUser eq 'fail'}"
+							class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<strong>Error!</strong> ¡¡¡ Error inesperado, intente de nuevo
+							!!!
+						</div>
+
+						<form id="registerForm" th:object="${reqUser}"
+							th:action="@{/user/register}" method="post"
+							class="form-horizontal">
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<input th:field="*{username}" type="text"
+										name="register_username" class="form-control"
+										placeholder="Username" required="required" value="" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<input th:field="*{firstName}" type="text"
+										name="register_firstName" class="form-control"
+										placeholder="Nombres" required="required" value="" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"></i>
+									</div>
+									<input th:field="*{lastName}" type="text"
+										name="register_lastName" class="form-control"
+										placeholder="Apellidos " required="required" value="" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-envelope"></i>
+									</div>
+									<input th:field="*{email}" type="email" name="register_email"
+										class="form-control" placeholder="E-mail" required="required"
+										value="" />
+								</div>
+							</div>
+							<!--<div class="form-group ">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    <input th:field="*{role}" type="role" name="register_role" class="form-control"
+                                        placeholder="Rol" required="required" value="" />
+                                </div>
+                            </div>-->
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-envelope"></i>
+									</div>
+									<input th:field="*{dni}" type="dni" name="register_dni"
+										class="form-control" placeholder="DNI" required="required"
+										value="" maxlength="11" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-envelope"></i>
+									</div>
+									<input th:field="*{gender}" type="gender"
+										name="register_gender" class="form-control" placeholder="Sexo"
+										required="required" value="" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-lock"></i>
+									</div>
+									<input th:field="*{password}" type="password"
+										name="register_password" class="form-control" id="password"
+										placeholder="Password" required="required" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-lock"></i>
+									</div>
+									<input th:field="*{password_2}" type="password"
+										name="register_cpassword" class="form-control"
+										id="confirm_password" placeholder="Confirm Password"
+										required="required" />
+								</div>
+							</div>
+							<input type="submit" value="Register"
+								class="btn btn-success btn-custom" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footerSeparator"></div>
+
+	<footer>
+		<div th:replace="fragments/footer :: footer">&copy; 2016 ibrahim
+			Karayel</div>
+	</footer>
+	<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+	<script>
+        var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+
+</body>
+
+</html>

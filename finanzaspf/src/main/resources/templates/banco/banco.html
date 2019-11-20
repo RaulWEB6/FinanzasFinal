@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Lista Impacto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<link href="/static/shoppy/css/bootstrap.css" rel="stylesheet"
+	type="text/css" media="all">
+<!-- Custom Theme files -->
+<link href="/static/shoppy/css/style.css" rel="stylesheet"
+	type="text/css" media="all" />
+<!--js-->
+<script src="/static/shoppy/js/jquery-2.1.1.min.js"></script>
+<!--icons-css-->
+<link href="/static/shoppy/css/font-awesome.css" rel="stylesheet">
+<!--Google Fonts-->
+<link href="//fonts.googleapis.com/css?family=Carrois+Gothic"
+	rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Work+Sans:400,500,600"
+	rel="stylesheet" type="text/css">
+<!--//skycons-icons-->
+</head>
+
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="mother-grid-inner">
+				<!--header start here-->
+				<div class="header-main">
+					<div class="header-left">
+						<div class="logo-name">
+							<a th:href="@{/home}">
+								<h1>UPC Factoring</h1>
+
+							</a>
+						</div>
+
+
+						<div class="clearfix"></div>
+					</div>
+					<div class="header-right">
+						<div class="profile_details_left">
+
+							<ul class="nofitications-dropdown">
+
+
+
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="profile_details">
+							<ul>
+								<li class="dropdown profile_details_drop"><a href="#"
+									class="dropdown-toggle" data-toggle="dropdown"
+									aria-expanded="false">
+										<div class="profile_img">
+											<span class="prfil-img"><img src="images/p1.png"
+												alt=""> </span>
+											<div class="user-name">
+												<p>[[${#httpServletRequest.remoteUser}]]</p>
+												<span>Administrator</span>
+											</div>
+											<i class="fa fa-angle-down lnr"></i> <i
+												class="fa fa-angle-up lnr"></i>
+											<div class="clearfix"></div>
+										</div>
+								</a>
+									<ul class="dropdown-menu drp-mnu">
+										<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+										<li><a><form th:action="@{/logout}" method="post">
+													<input type="submit" value="Cerrar Sesión" /><i
+														class="fa fa-sign-out"></i>
+												</form></a></li>
+									</ul></li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<script>
+				$(document).ready(function () {
+					var navoffeset = $(".header-main").offset().top;
+					$(window).scroll(function () {
+						var scrollpos = $(window).scrollTop();
+						if (scrollpos >= navoffeset) {
+							$(".header-main").addClass("fixed");
+						} else {
+							$(".header-main").removeClass("fixed");
+						}
+					});
+
+				});
+			</script>
+
+			<div class="inner-block">
+				<div class="inbox">
+					<br>
+
+					<h1 class="h3 mb-4 text-gray-800">Registro de nuevas entidades
+						Bancarias:</h1>
+
+					<br>
+
+					<form th:action="@{/bancos/guardar}" th:object="${banco}"
+						method="post" enctype="multipart/form-data">
+
+						<div class="form-group row" style="display: none !important;">
+							<label for="idBanco" class="col-sm-2 col-form-label">Id</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{idBanco}" class="form-control" />
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label for="nombreBanco" class="col-sm-2 col-form-label">Nombre
+								comercial del Banco: </label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{nombreBanco}"
+									class="form-control" th:errorclass="'form-control alert-info'"
+									maxlength="30" /> <small
+									th:if="${#fields.hasErrors('nombreBanco')}"
+									th:errors="*{nombreBanco}"></small>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label for="rucBanco" class="col-sm-2 col-form-label">RUC:
+							</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{rucBanco}" class="form-control"
+									th:errorclass="'form-control alert-danger'" maxlength="11" />
+								<small th:if="${#fields.hasErrors('rucBanco')}"
+									th:errors="*{rucBanco}"></small>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label for="tasaBanco" class="col-sm-2 col-form-label">Tasa
+								efectiva anual:</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{tasaBanco}" class="form-control"
+									th:errorclass="'form-control alert-info'" maxlength="4" /> <small
+									th:if="${#fields.hasErrors('tasaBanco')}"
+									th:errors="*{tasaBanco}"></small>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+							<div class="col-sm-6">
+								<input type="file" name="file" class="form-control"
+									th:text="${banco.foto}" required="required" />
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6" align="center">
+								<input type="submit" value="Registrar" class="btn btn-primary" />
+
+								<a href="/empresas/bienvenido" class="btn btn-danger">Cancelar</a>
+							</div>
+						</div>
+					</form>
+
+					<br> <br> <br> <br> <br>
+				</div>
+			</div>
+
+			<!--inner block end here-->
+			<!--copy rights start here-->
+			<div class="copyrights">
+				<p>
+					© 2019 Todos los derechos reservados | Tean dinamita by <a
+						href="https://www.facebook.com/RaulBurga.Q/" target="_blank">Burga</a>
+				</p>
+			</div>
+			<!--COPY rights end here-->
+		</div>
+
+		<!--slider menu-->
+		<div class="sidebar-menu">
+			<div class="logo">
+				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span>
+				</a> <a href="#"> <span id="logo"></span> <!--<img id="logo" src="" alt="Logo"/>-->
+				</a>
+			</div>
+			<div class="menu">
+				<ul id="menu">
+					<li id="menu-home"><a th:href="@{/movie/listar}"><i
+							class="fa fa-tachometer"></i><span>Bancos</span><span
+							class="fa fa-angle-right" style="float: right"></span></a>
+						<ul>
+							<li><a th:href="@{/bancos/listar}">Lista</a></li>
+							<li><a th:href="@{/bancos/nuevo}">Nuevo</a></li>
+						</ul></li>
+					<li id="menu-home"><a th:href="@{/location/list}"><i
+							class="fa fa-map-marker"></i><span>Empresas</span><span
+							class="fa fa-angle-right" style="float: right"></span></a>
+						<ul>
+							<li><a th:href="@{/empresas/listar}">Lista</a></li>
+							<li><a th:href="@{/empresas/nuevo}">Nuevo</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<!--slide bar menu end here-->
+		<script>
+		var toggle = true;
+
+		$(".sidebar-icon").click(function () {
+			if (toggle) {
+				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+				$("#menu span").css({ "position": "absolute" });
+			}
+			else {
+				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+				setTimeout(function () {
+					$("#menu span").css({ "position": "relative" });
+				}, 400);
+			}
+			toggle = !toggle;
+		});
+	</script>
+		<!--scrolling js-->
+		<script src="/static/shoppy/js/jquery.nicescroll.js"></script>
+		<script src="/static/shoppy/js/scripts.js"></script>
+		<!--//scrolling js-->
+		<script src="/static/shoppy/js/bootstrap.js"> </script>
+		<!-- mother grid end here-->
+	</div>
+</body>
+
+</html>
