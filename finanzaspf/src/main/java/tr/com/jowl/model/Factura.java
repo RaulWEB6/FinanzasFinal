@@ -52,7 +52,6 @@ public class Factura implements Serializable {
 	@Column(name = "totalFactura", nullable = false)
 	private int totalFactura;
 
-	@NotNull(message = "La fecha actual es obligatoria")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fechaaFactura")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
